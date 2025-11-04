@@ -1,13 +1,10 @@
 <!doctype html>
-<html lang="fr" data-theme="dark">
+<html lang="en" data-theme="dark">
     <head>
-        <!-- meta title, description,...-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="color-scheme" content="light dark">
-        <title>Lisa Sibeni - Développeuse Web</title>
-        <meta name="description" content="Lisa Sibeni, développeuse web passionnée. Je crée des sites modernes et performants, alliant design épuré et fonctionnalités sur mesure. Découvrez mes projets et contactez-moi pour collaborer sur vos idées web.">
-        <!--stylesheets-->
+        <title>Lisa Sibeni - Developer</title>
         <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.cyan.min.css"
@@ -17,127 +14,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="assets/style.css"/>
-        <!--Scripts-->
-        <script type="module" src="main.js"></script>
-        <!--opengraph-->
-        <meta property="og:site_name" content="Lisa Sibeni - Développeuse Web" />
-	    <meta property="og:type" content="website" />
-	    <meta property="og:url" content="" id="https://sibeni.dev" />
-	    <meta property="og:title" content="Lisa Sibeni - Développeuse Web" />
-	    <meta property="og:description" content="Lisa Sibeni, développeuse web passionnée. Je crée des sites modernes et performants, alliant design épuré et fonctionnalités sur mesure. Découvrez mes projets et contactez-moi pour collaborer sur vos idées web." />
-	    <meta property="og:image" content="https://raw.githubusercontent.com/sibeni-li/projet_8/refs/heads/main/assets/images/sibeni-logo-630x630.png" />
-        <!--twitter cards-->
-        <meta name="twitter:card" content="summary" />
-	    <meta name="twitter:site" content="@Lisa16861Pro" />
-	    <meta name="twitter:title" content="Lisa Sibeni - Développeuse Web" />
-	    <meta name="twitter:description" content="Lisa Sibeni, développeuse web passionnée. Je crée des sites modernes et performants, alliant design épuré et fonctionnalités sur mesure. Découvrez mes projets et contactez-moi pour collaborer sur vos idées web." />
-	    <meta name="twitter:image:src" content="https://raw.githubusercontent.com/sibeni-li/projet_8/refs/heads/main/assets/images/sibeni-logo-630x630.png"/>
-	    <meta name="twitter:url" content="" id="https://sibeni.dev"/>
     </head>
     <body>
-        <!-- Header section -->
-        <header class="container">
-            <!-- Navigation menu -->
-            <nav class="nav">
-                <img src="assets/images/sibeni.dev-logo-512x512.png" class="logo-nav" alt="Logo de Lisa Sibeni"/>
-                <ul>
-                    <li><a href="#about">A propos</a></li>
-                    <li><a href="#skills">Compétences</a></li>
-                    <li><a href="#projects">Projets</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <!-- Title and profile picture -->
-            <div class="title">
-                <h1>Lisa Sibeni - Développeuse Web</h1>
-                <img src="/assets/images/ls-portfolio.jpg" class="profile-picture" alt="Photo de Lisa Sibeni"/>
-                <a href="https://cvdesignr.com/p/607022dc6af1c" target="_blank">Mon CV</a>
-            </div>
-        </header>
-        <!-- Main content container -->
         <main class="container">
-            <hr/>
-            <!-- About Me section -->
-            <section>
-                <h2 id="about">A propos de moi</h2>
-                <p>Développeuse web junior, formée chez OpenClassrooms, je suis passionnée par la programmation et plus particulièrement le web.
-                    Je me ferai un plaisir de vous accompagner dans le développement et la réalisation de tous vos projets de sites ou d'application web. 
-                    Je suis déterminée à progresser rapidement et à apporter de la valeur au sein d'une équipe.
-                </p>
-                <!-- Social media links -->
-                <div class="div-logo">
-                    <a href="https://x.com/Lisa16861Pro" class="link-logo" target="_blank"><img src="assets/images/x-logo.avif" class="logo" alt=" Logo de X"/></a>
-                    <a href="https://github.com/sibeni-li" class="link-logo" target="_blank"><img src="assets/images/github-logo.webp" class="logo" alt="Logo de github"/></a>
-                </div>
-            </section>
-            <hr/>
-            <!-- Skills section -->
-            <section class="skills">
-                <h2 id="skills">Mes compétences</h2>
-                <div class="grid">
-                    <div>
-                        <h3 class="skills-title">Front-end</h3>
-                        <p><strong>Languages</strong>: HTML5, CSS3, JavaScript</p>
-                        <p><strong>Frameworks</strong>: Pico CSS, React</p>
-                        <p><strong>Pré-processeurs</strong>: Sass</p>
-                    </div>
-                    <div>
-                        <h3 class="skills-title">Back-end</h3>
-                        <p><strong>Languages</strong>: Node.js</p>
-                        <p><strong>Frameworks</strong>: Express.js</p>
-                        <p><strong>Base de données</strong>: MongoDB</p>
-                        <p><strong>API</strong>: Création et utilisation d'API</p>
-                    </div>
-                    <div>
-                        <h3 class="skills-title">Outils</h3>
-                        <p><strong>Environnement de dev</strong>: VsCode</p>
-                        <p><strong>Gestion de projet</strong>: Git, Github</p>
-                        <p><strong>Déploiement</strong>: Linode, Caddy, PM2</p>
-                        <p></p>
-                    </div>
-                </div>
-            </section>
-            <hr/>
-            <!-- Projects section -->
-            <section>
-                <h2 id="projects">Mes projets</h2>
-                <!-- Project cards will be dynamically inserted here by JavaScript -->
-                <div class="projects">
-                </div>
-            </section>
-            <hr/>
-            <!-- Contact section -->
-            <section class="contact">
-                <h2 id="contact">Me contacter</h2>
-                <form method="post" action="/send-email" class="form">
-                    <fieldset>
-                        <legend>Contactez moi !</legend>
-                        <label>
-                            Votre nom
-                            <input name="name" id="name" placeholder="Votre nom" autocomplete="name"/>
-                        </label>
-                        <label>
-                            Votre nom de société
-                            <input name="name-society" id="name-society" placeholder="Votre nom de société"/>
-                        </label>
-                        <label>
-                            Email
-                            <input type="email" name="email" id="email" placeholder="email@example.com" autocomplete="email"/>
-                        </label>
-                        <label>
-                            Votre message
-                            <textarea name="message" id="message" placeholder="Votre message ici..."></textarea>
-                        </label>
-                    </fieldset>
-                    <input type="submit" value="Envoyer"/>
-                </form>
-            </section>
-            <hr/>
+            <div class="title">
+                <h1>Comming soon!</h1>
+            </div>
         </main>
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2024 Lisa Sibeni.<br/> Tous droits réservés.</p>
-            <img src="assets/images/sibeni.dev-logo-512x512.png" class="logo-footer" alt="Logo de Lisa Sibeni"/>
-        </footer>
     </body>
     </html>

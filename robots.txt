@@ -1,4 +1,0 @@
-user-agent: *
-Disallow: /send-email/
-Disallow: /assets/images
-Allow: /index.html
