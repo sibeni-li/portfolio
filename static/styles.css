@@ -1,0 +1,36 @@
+body {
+    background-color: #010101;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.title {
+    font-size: 3em;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+}
+
+.btn-container {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    border: solid 2px cyan;
+    border-color: cyan;
+    padding: 20px 30px;
+    clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2em;
+}
