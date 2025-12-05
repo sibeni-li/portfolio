@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="title">ABOUT ME</h1>
+    <div class="about-section">
+        <div>
+            <img src="{{ url_for('static', filename='profile.png') }}" alt="Profile Picture" class="profile-pic">
+        </div>
+        <div class="wrapper">
+            <div class="about-content">
+                <h2 class="abt-title">BIO</h2>
+                <p>
+                    I hold a Level 5 RNCP diploma (equivalent to Associate's degree) in Web Development from OpenClassrooms and a verified CS50 certificate from Harvard. 
+                    While my foundation is in web development, I've fallen in love with C programming and am actively expanding into IoT development.<br><br>
+                    My vision is to create end-to-end solutions that span from hardware design and low-level programming to intuitive web interfaces for data visualization and device control. 
+                    I specialize in connecting embedded systems with modern web applications, transforming raw sensor data and hardware functionality into accessible, user-friendly experiences.<br><br>
+                    A recent project that exemplifies this approach is a C program profiling library that generates JSON output, paired with a Flask application for uploading and visualizing performance data through interactive charts and analytics. 
+                    This reflects my core interest: making embedded systems and low-level programming accessible through elegant web interfaces.
+                </p>
+            </div>
+            <div class="about-content">
+                <h2 class="abt-title">SKILLS</h2>
+                <div>
+                    <ul>
+                        <li>C</li>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>HTML & CSS</li>
+                        <li>Flask</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+{% endblock %}
