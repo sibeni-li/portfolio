@@ -1,4 +1,5 @@
 body {
+    color: #ffffff;
     background-color: #010101;
 }
 
@@ -13,7 +14,11 @@ body {
 
 .title {
     font-size: 3em;
-    color: #ffffff;
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+}
+
+.abt-title {
+    color: #00f0ff;
     text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
 }
 
@@ -22,10 +27,10 @@ body {
     gap: 20px;
 }
 
-.button {
-    border: solid 2px cyan;
-    border-color: cyan;
+.button, .about-content {
+    border: solid 1px cyan;
     padding: 20px 30px;
+    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
     clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
 }
 
@@ -33,4 +38,48 @@ a {
     text-decoration: none;
     color: #ffffff;
     font-size: 1.2em;
+}
+
+.button:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+    transition: all 0.3s ease;
+}
+.about-section {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    gap: 5vh;
+    width: 90%;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+li {
+    border: solid 1px #ff00ff;
+    padding: 10px 15px;
+    box-shadow: 0 0 10px #ff00ff, inset 0 0 10px rgba(255, 0, 255, 1);
+    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+}
+
+.profile-pic {
+    width: 100%;
+    border: solid 1px #00f0ff;
+    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
+    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.svg{
+    height: 75vh;
+    z-index: 0;
 }
