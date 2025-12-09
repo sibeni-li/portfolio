@@ -63,3 +63,20 @@ def insert_language(project_id, language):
     finally:
         if conn:
             conn.close()
+
+def get_projects_names():
+    conn = None
+    try:
+        conn = sqlite3.connect('projects.db')
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        c.execute('SELECT id, name FROM projects')
+        projects = c.fetchall()
+        return projects
+    except sqlite3.Error as e:
+        print(f"DB error during fetching project names: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
