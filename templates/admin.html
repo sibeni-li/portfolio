@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="title">ADMIN PANEL</h1>
+    <form method="post" action="/admin">
+        <div>
+            <input autocomplete="off" type="text" name="project-name" placeholder="Project Name">
+        </div>
+        <div>
+            <input autocomplete="off" type="text" name="desc" placeholder="Project Description">
+        </div>
+        <div>
+            <input autocomplete="off" type="file" accept="image/" name="project-img" placeholder="Project Image URL">
+        </div>
+        <div>
+            <input autocomplete="off" type="text" name="project-url" placeholder="Project URL">
+        </div>
+        <div>
+            <input autocomplete="off" type="text" name="project-github" placeholder="Project GitHub URL">
+        </div>
+        <div>
+            <input autocomplete="off" type="text" name="project-tech" placeholder="Project Technologies (comma separated)">
+        </div>
+        <button type="submit">Add Project</button>
+    </form>
+{% endblock %}
