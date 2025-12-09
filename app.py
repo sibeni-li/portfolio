@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from werkzeug.security import check_password_hash
 
 from helpers import login_required
-from schema import create_table, insert_project, insert_language
+from schema import create_table, insert_project, insert_language, get_projects_names
 
 app = Flask(__name__)
 
@@ -37,10 +37,10 @@ def about():
     return render_template('about.html')
 
 
-# TODO
 @app.route('/projects')
 def projects():
-    return render_template('projects.html')
+    projects = get_projects_names()
+    return render_template('projects.html', projects=projects)
 
 
 # TODO
@@ -87,7 +87,7 @@ def admin():
         techs = request.form.get("project-tech")
 
         project_id = insert_project(project_name, desc, img, url, github)
-        
+
         if project_id and techs:
             for tech in techs.split(','):
                 insert_language(project_id, tech.strip())
