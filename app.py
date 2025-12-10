@@ -1,11 +1,12 @@
 import os
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, send_file
 from flask_session import Session
 from dotenv import load_dotenv
+from io import BytesIO
 from werkzeug.security import check_password_hash
 
 from helpers import login_required
-from schema import create_table, insert_project, insert_language, get_projects_names
+from schema import create_table, insert_project, insert_language, get_projects_names, get_project_details, get_project_languages
 
 app = Flask(__name__)
 
@@ -43,11 +44,20 @@ def projects():
     return render_template('projects.html', projects=projects)
 
 
-# TODO
+
 @app.route('/project/<int:project_id>')
 def project(project_id):
-    # Handle project details here
-    pass
+    project = get_project_details(project_id)
+    languages = get_project_languages(project_id)
+    return render_template('project.html', project=project, languages=languages)
+
+
+@app.route('/project_image/<int:project_id>')
+def project_image(project_id):
+    project = get_project_details(project_id)
+    if project and project['image']:
+        return send_file(BytesIO(project['image']), mimetype='image/png')
+    return "Image not found", 404
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -78,10 +88,14 @@ def admin():
         return redirect('/login')
     
     if request.method == 'POST':
-        # Handle admin actions here
         project_name = request.form.get("project-name")
         desc = request.form.get("desc")
-        img = request.form.get("project-img")
+
+        img_file = request.files.get("project-img")  
+        if not img_file or img_file.filename == '':
+            return render_template("admin.html", error="Please provide an image")
+        img = img_file.read()
+
         url = request.form.get("project-url")
         github = request.form.get("project-github")
         techs = request.form.get("project-tech")
