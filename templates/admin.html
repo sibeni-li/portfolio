@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 
 {% block main %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
     <h1 class="title">ADMIN PANEL</h1>
-    <form method="post" action="/admin">
+    <form method="post" action="/admin " enctype="multipart/form-data">
         <div>
             <input autocomplete="off" type="text" name="project-name" placeholder="Project Name">
         </div>
@@ -10,7 +13,7 @@
             <input autocomplete="off" type="text" name="desc" placeholder="Project Description">
         </div>
         <div>
-            <input autocomplete="off" type="file" accept="image/" name="project-img" placeholder="Project Image URL">
+            <input autocomplete="off" type="file" accept="image/*" name="project-img" placeholder="Project Image URL">
         </div>
         <div>
             <input autocomplete="off" type="text" name="project-url" placeholder="Project URL">
