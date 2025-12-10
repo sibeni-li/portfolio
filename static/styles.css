@@ -1,4 +1,5 @@
 body {
+    min-width: 320px;
     color: #ffffff;
     background-color: #010101;
     font-family: 'Courier Prime', monospace;
@@ -15,14 +16,15 @@ body {
     gap: 5vh;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .title {
     font-size: 3em;
-    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+    text-transform: uppercase;
     animation: titlePulse 5s ease-in-out infinite;
 }
+
 @keyframes titlePulse {
     0%, 100% { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff; }
     50% { text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff, 0 0 45px #ff00ff; }
@@ -111,6 +113,7 @@ ul {
 
 li, .pink-card {
     background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 255, 0.2));
+    text-transform: uppercase;
     border: solid 1px #ff00ff;
     padding: 10px 15px;
     box-shadow: 0 0 10px #ff00ff, inset 0 0 10px rgba(255, 0, 255, 1);
@@ -156,14 +159,6 @@ li, .pink-card {
     box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, inset 0 0 20px rgba(0, 240, 255, 1);
 }
 
-.projects-container .project-card:nth-child(even) {
-    transform: translateY(20px);
-}
-
-.projects-container .project-card:nth-child(even):hover {
-    transform: translateY(10px);
-}
-
 .project-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -182,7 +177,7 @@ li, .pink-card {
 .project-card {
     background: linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(255, 0, 255, 0.03));
     position: relative;
-    animation: borderGlow 3s ease-in-out infinite;
+    animation: borderGlow 5s ease-in-out infinite;
 }
 
 @keyframes borderGlow {
@@ -235,4 +230,45 @@ button:hover {
     box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, inset 0 0 20px rgba(255, 0, 255, 0.5);
     transform: scale(1.02);
     transition: all 0.3s ease;
+}
+
+@media (max-width: 800px) {
+    .title {
+        text-align: center;
+        font-size: 2em;
+    }
+    
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-section {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px 0;
+    }
+    
+    .about-section > div:first-child {
+        max-width: 400px;
+    }
+    
+    .wrapper {
+        width: 100%;
+    }
+    
+    ul {
+        flex-wrap: wrap;
+    }
+
+    .project-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-container .project-card:first-child {
+        grid-row: span 1;
+    }
 }
