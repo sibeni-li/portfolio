@@ -6,6 +6,7 @@
         <p>{{ error }}</p>
     {% endif %}
     <form method="post" action="/login">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
             <input autocomplete= "off" autofocus type="text" name="username" placeholder="Username" required>
         </div>

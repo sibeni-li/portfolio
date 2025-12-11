@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, session, send_file
 from flask_session import Session
+from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv
 from io import BytesIO
 from werkzeug.security import check_password_hash
@@ -9,13 +10,15 @@ from helpers import login_required
 from schema import create_table, insert_project, insert_language, get_projects_names, get_project_details, get_project_languages
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
+load_dotenv()
+
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-
-load_dotenv()
 create_table()
 
 
@@ -48,6 +51,8 @@ def projects():
 @app.route('/project/<int:project_id>')
 def project(project_id):
     project = get_project_details(project_id)
+    if not project:
+        return render_template("project.html", error="Project not found")
     languages = get_project_languages(project_id)
     return render_template('project.html', project=project, languages=languages)
 
@@ -74,15 +79,15 @@ def login():
     return render_template('login.html')
 
 
-@login_required
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('logged_in', None)
     return redirect('/')
 
 
-@login_required
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin():
     if not session.get('logged_in'):
         return redirect('/login')

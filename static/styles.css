@@ -19,6 +19,34 @@ body {
     min-height: 100vh;
 }
 
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-link {
+    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
+    clip-path: polygon(5vh 0%, 100% 0%, 100% calc(100% - 6vh), calc(100% - 5vh) 100%, 0% 100%, 0% 6vh);
+    padding: 2vh;;
+    width: 100%;
+    text-align: center;
+}
+
+/*.active {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+}
+*/
+
 .title {
     font-size: 3em;
     text-transform: uppercase;
@@ -60,7 +88,7 @@ a {
     animation: borderGlow 3s ease-in-out infinite;
 }
 
-.button:hover {
+.button:hover, .nav-link:hover {
     background-color: rgba(0, 255, 255, 0.1);
     box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
     transform: scale(1.05);
@@ -103,7 +131,7 @@ a {
     transition: all 0.3s ease;
 }
 
-ul {
+.list {
     list-style-type: none;
     display: flex;
     justify-content: start;
@@ -111,7 +139,7 @@ ul {
     padding: 0;
 }
 
-li, .pink-card {
+.list-item, .pink-card {
     background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 255, 0.2));
     text-transform: uppercase;
     border: solid 1px #ff00ff;
@@ -232,18 +260,6 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-@media (max-width: 800px) {
-    .title {
-        text-align: center;
-        font-size: 2em;
-    }
-    
-    .btn-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 @media (max-width: 1024px) {
     .about-section {
         flex-direction: column;
@@ -264,11 +280,38 @@ button:hover {
         flex-wrap: wrap;
     }
 
+    .nav-links {
+        flex-wrap: nowrap;
+    }
+
     .project-container {
         grid-template-columns: 1fr;
     }
     
     .project-container .project-card:first-child {
         grid-row: span 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .nav-links {
+        align-items: center;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    .nav-link {
+        clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+        width: 75%;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 2em;
+    }
+    
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
