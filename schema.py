@@ -118,3 +118,37 @@ def get_project_languages(project_id):
     finally:
         if conn:
             conn.close()
+
+# Delete functions
+def delete_project(project_id):
+    conn = None
+    try:
+        conn = sqlite3.connect('projects.db')
+        c = conn.cursor()
+        c.execute('DELETE FROM languages WHERE project_id = ?', (project_id,))
+        c.execute('DELETE FROM projects WHERE id = ?', (project_id,))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"DB error during project deletion: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+# Update functions
+def update_project(project_id, name, description, image, site_url, github_url):
+    conn = None
+    try:
+        conn = sqlite3.connect('projects.db')
+        c = conn.cursor()
+        c.execute('''
+            UPDATE projects
+            SET name = ?, description = ?, image = ?, site_url = ?, github_url = ?
+            WHERE id = ?
+        ''', (name, description, image, site_url, github_url, project_id))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"DB error during project update: {e}")
+    finally:
+        if conn:
+            conn.close()
+    
