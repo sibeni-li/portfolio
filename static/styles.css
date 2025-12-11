@@ -1,14 +1,29 @@
+:root {
+    --color-primary: #00f0ff;
+    --color-secondary: #ff00ff;
+    --color-bg: #010101;
+    --color-text: #ffffff;
+    --clip-small: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    --clip-medium: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+    --clip-nav: polygon(5vh 0%, 100% 0%, 100% calc(100% - 6vh), calc(100% - 5vh) 100%, 0% 100%, 0% 6vh);
+    --shadow-cyan: 0 0 10px var(--color-primary);
+    --shadow-cyan-inset: inset 0 0 10px rgba(0, 240, 255, 1);
+    --shadow-cyan-both: var(--shadow-cyan), var(--shadow-cyan-inset);
+    --gradient-bg: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(255, 0, 255, 0.05));
+    --gradient-bg-subtle: linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(255, 0, 255, 0.03));
+    --gradient-pink: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 255, 0.2));
+}
+
 body {
     min-width: 320px;
-    color: #ffffff;
-    background-color: #010101;
+    color: var(--color-text);
+    background-color: var(--color-bg);
     font-family: 'Courier Prime', monospace;
     background-image: 
         linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
 }
-
 
 .container {
     display: flex;
@@ -34,18 +49,12 @@ body {
 }
 
 .nav-link {
-    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
-    clip-path: polygon(5vh 0%, 100% 0%, 100% calc(100% - 6vh), calc(100% - 5vh) 100%, 0% 100%, 0% 6vh);
-    padding: 2vh;;
+    box-shadow: var(--shadow-cyan-both);
+    clip-path: var(--clip-nav);
+    padding: 2vh;
     width: 100%;
     text-align: center;
 }
-
-/*.active {
-    background-color: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-}
-*/
 
 .title {
     font-size: 3em;
@@ -54,14 +63,14 @@ body {
 }
 
 @keyframes titlePulse {
-    0%, 100% { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff; }
-    50% { text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff, 0 0 45px #ff00ff; }
+    0%, 100% { text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary); }
+    50% { text-shadow: 0 0 15px var(--color-secondary), 0 0 30px var(--color-secondary), 0 0 45px var(--color-secondary); }
 }
 
-.abt-title, .project-title {
+.abt-title, .project-title, .adm-title {
     text-transform: uppercase;
-    color: #ffffff;
-    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+    color: var(--color-text);
+    text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
 }
 
 .btn-container {
@@ -73,28 +82,32 @@ body {
 .button, .about-content, .project-card {
     border: solid 1px cyan;
     padding: 20px 30px;
-    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
-    clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+    box-shadow: var(--shadow-cyan-both);
+    clip-path: var(--clip-medium);
+}
+
+.nav-link > a {
+    display: block;
+    width: 100%;
 }
 
 a {
     text-decoration: none;
-    color: #ffffff;
+    color: var(--color-text);
     font-size: 1.2em;
 }
 
 .button {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(255, 0, 255, 0.05));
+    background: var(--gradient-bg);
     animation: borderGlow 3s ease-in-out infinite;
 }
 
 .button:hover, .nav-link:hover {
     background-color: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
+    box-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
-
 
 .about-section {
     display: flex;
@@ -121,13 +134,13 @@ a {
 }
 
 .about-content {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(255, 0, 255, 0.03));
+    background: var(--gradient-bg-subtle);
     animation: borderGlow 3s ease-in-out infinite;
 }
 
 .about-content:hover {
     transform: translateX(5px);
-    box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, inset 0 0 20px rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 20px var(--color-primary), 0 0 40px var(--color-primary), inset 0 0 20px rgba(0, 240, 255, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -139,30 +152,32 @@ a {
     padding: 0;
 }
 
-.list-item, .pink-card {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 255, 0.2));
+.list-item, .pink-card, .item-link {
+    background: var(--gradient-pink);
     text-transform: uppercase;
-    border: solid 1px #ff00ff;
+    border: solid 1px var(--color-secondary);
     padding: 10px 15px;
-    box-shadow: 0 0 10px #ff00ff, inset 0 0 10px rgba(255, 0, 255, 1);
-    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    box-shadow: 0 0 10px var(--color-secondary), inset 0 0 10px rgba(255, 0, 255, 1);
+    clip-path: var(--clip-small);
+}
+
+.profile-pic, .project-image {
+    width: 100%;
+    border: solid 1px var(--color-primary);
+    box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5);
+    clip-path: var(--clip-medium);
 }
 
 .profile-pic {
-    width: 100%;
-    border: solid 1px #00f0ff;
-    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 1);
-    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
     animation: imageGlow 4s ease-in-out infinite;
-
 }
 
 @keyframes imageGlow {
-    0%, 100% { box-shadow: 0 0 15px #00f0ff, inset 0 0 15px rgba(0, 240, 255, 0.5); }
-    50% { box-shadow: 0 0 25px #ff00ff, inset 0 0 25px rgba(255, 0, 255, 0.5); }
+    0%, 100% { box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5); }
+    50% { box-shadow: 0 0 25px var(--color-secondary), inset 0 0 25px rgba(255, 0, 255, 0.5); }
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     gap: 5vh;
@@ -177,17 +192,17 @@ a {
 }
 
 .projects-container .project-card {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(255, 0, 255, 0.05));
+    background: var(--gradient-bg);
     transition: all 0.3s ease;
     position: relative;
 }
 
 .projects-container .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, inset 0 0 20px rgba(0, 240, 255, 1);
+    box-shadow: 0 0 20px var(--color-primary), 0 0 40px var(--color-primary), inset 0 0 20px rgba(0, 240, 255, 1);
 }
 
-.project-container {
+.project-container, .admin-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
@@ -195,69 +210,79 @@ a {
     padding: 40px 0;
 }
 
-.project-image {
-    width: 100%;
-    border: solid 1px #00f0ff;
-    box-shadow: 0 0 15px #00f0ff, inset 0 0 15px rgba(0, 240, 255, 0.5);
-    clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+.project-container .project-card:first-child {
+    grid-row: span 2;
 }
 
 .project-card {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(255, 0, 255, 0.03));
+    background: var(--gradient-bg-subtle);
     position: relative;
     animation: borderGlow 5s ease-in-out infinite;
 }
 
 @keyframes borderGlow {
-    0%, 100% { box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 0.5); }
-    50% { box-shadow: 0 0 20px #ff00ff, inset 0 0 20px rgba(255, 0, 255, 0.5); }
+    0%, 100% { box-shadow: var(--shadow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.5); }
+    50% { box-shadow: 0 0 20px var(--color-secondary), inset 0 0 20px rgba(255, 0, 255, 0.5); }
 }
-
-.project-container .project-card:first-child {
-    grid-row: span 2;
-}
-
 
 form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 40px;
-    border: solid 1px cyan;
-    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 0.5);
-    clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(255, 0, 255, 0.03));
+    padding: 3em;
 }
 
-input {
+form, .admin-project-item {
+    border: solid 1px cyan;
+    box-shadow: var(--shadow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.5);
+    clip-path: var(--clip-medium);
+    background: var(--gradient-bg-subtle);
+}
+
+.admin-project-item {
+    text-transform: uppercase;
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    margin-bottom: 2em;
+    gap: 3vw;
+}
+
+input, textarea {
+    width: 95%;
     background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid #00f0ff;
-    color: #ffffff;
+    border: 1px solid var(--color-primary);
+    color: var(--color-text);
     padding: 10px;
     font-family: 'Courier Prime', monospace;
     box-shadow: inset 0 0 5px rgba(0, 240, 255, 0.3);
 }
 
-input:focus {
+input:focus, textarea:focus {
     outline: none;
-    box-shadow: 0 0 10px #00f0ff, inset 0 0 10px rgba(0, 240, 255, 0.5);
+    box-shadow: var(--shadow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 button {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 255, 0.2));
-    border: solid 1px #ff00ff;
-    color: #ffffff;
+    background: var(--gradient-pink);
+    border: solid 1px var(--color-secondary);
+    color: var(--color-text);
     padding: 15px;
     font-family: 'Courier Prime', monospace;
     cursor: pointer;
-    box-shadow: 0 0 10px #ff00ff, inset 0 0 10px rgba(255, 0, 255, 0.3);
-    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    box-shadow: 0 0 10px var(--color-secondary), inset 0 0 10px rgba(255, 0, 255, 0.3);
+    clip-path: var(--clip-small);
 }
 
 button:hover {
-    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, inset 0 0 20px rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 20px var(--color-secondary), 0 0 40px var(--color-secondary), inset 0 0 20px rgba(255, 0, 255, 0.5);
     transform: scale(1.02);
     transition: all 0.3s ease;
+}
+
+.admin-projects {
+    padding:0;
 }
 
 @media (max-width: 1024px) {
@@ -301,7 +326,7 @@ button:hover {
     }
 
     .nav-link {
-        clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+        clip-path: var(--clip-medium);
         width: 75%;
     }
 
