@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="title">MY PROJECTS</h1>
+    <div class="projects-container">
+    {% for project in projects %}
+        <div class="project-card">
+            <h2 class="project-title">{{ project.name }}</h2>
+            <a href="/project/{{ project.id }}"><p class="pink-card">View Details</p></a>
+        </div>
+    {% endfor %}
+    </div>
+    
+{% endblock %}
