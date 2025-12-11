@@ -7,7 +7,7 @@ from io import BytesIO
 from werkzeug.security import check_password_hash
 
 from helpers import login_required
-from schema import create_table, insert_project, insert_language, get_projects_names, get_project_details, get_project_languages
+from schema import create_table, insert_project, insert_language, get_projects_names, get_project_details, get_project_languages, delete_project
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -31,6 +31,7 @@ def after_request(response):
     return response
 
 
+# Public routes
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -65,6 +66,7 @@ def project_image(project_id):
     return "Image not found", 404
 
 
+# Admin routes
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -111,4 +113,19 @@ def admin():
             for tech in techs.split(','):
                 insert_language(project_id, tech.strip())
 
-    return render_template('admin.html')
+    return render_template('admin.html', projects=get_projects_names())
+
+
+@app.route('/delete/<int:project_id>')
+@login_required
+def delete(project_id):
+    delete_project(project_id)
+    return redirect('/admin')
+
+
+# TODO
+@app.route('/edit/<int:project_id>', methods=['POST'])
+@login_required
+def edit_project(project_id):
+    # Implement the logic to edit the project here
+    return redirect('/admin')

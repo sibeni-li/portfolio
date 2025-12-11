@@ -5,27 +5,44 @@
         <p>{{ error }}</p>
     {% endif %}
     <h1 class="title">ADMIN PANEL</h1>
-    <form method="post" action="/admin" enctype="multipart/form-data" class="admin-form">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="admin-container">
         <div>
-            <input autocomplete="off" type="text" name="project-name" placeholder="Project Name">
+            <h2 class="adm-title">Add New Project</h2>
+            <form method="post" action="/admin" enctype="multipart/form-data" class="admin-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div>
+                    <input autocomplete="off" type="text" name="project-name" placeholder="Project Name">
+                </div>
+                <div>
+                    <textarea autocomplete="off" name="desc" placeholder="Project Description"></textarea>
+                </div>
+                <div>
+                    <input autocomplete="off" type="file" accept="image/*" name="project-img" placeholder="Project Image URL">
+                </div>
+                <div>
+                    <input autocomplete="off" type="text" name="project-url" placeholder="Project URL">
+                </div>
+                <div>
+                    <input autocomplete="off" type="text" name="project-github" placeholder="Project GitHub URL">
+                </div>
+                <div>
+                    <input autocomplete="off" type="text" name="project-tech" placeholder="Project Technologies (comma separated)">
+                </div>
+                <button type="submit">Add Project</button>
+            </form>
         </div>
         <div>
-            <input autocomplete="off" type="text" name="desc" placeholder="Project Description">
+            <h2 class="adm-title">Existing Projects</h2>
+            <ul class="admin-projects">
+                {% for project in projects %}
+                    <li class="admin-project-item">
+                        <span>{{ project.name }}</span>
+                        <a href="/edit/{{ project.id }}" class="item-link">Edit</a>
+                        <a href="/delete/{{ project.id }}" class="item-link">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-        <div>
-            <input autocomplete="off" type="file" accept="image/*" name="project-img" placeholder="Project Image URL">
-        </div>
-        <div>
-            <input autocomplete="off" type="text" name="project-url" placeholder="Project URL">
-        </div>
-        <div>
-            <input autocomplete="off" type="text" name="project-github" placeholder="Project GitHub URL">
-        </div>
-        <div>
-            <input autocomplete="off" type="text" name="project-tech" placeholder="Project Technologies (comma separated)">
-        </div>
-        <button type="submit">Add Project</button>
-    </form>
+    </div>
     <script src="{{ url_for('static', filename='validation.js') }}"></script>
 {% endblock %}
