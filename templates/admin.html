@@ -5,7 +5,8 @@
         <p>{{ error }}</p>
     {% endif %}
     <h1 class="title">ADMIN PANEL</h1>
-    <form method="post" action="/admin " enctype="multipart/form-data">
+    <form method="post" action="/admin" enctype="multipart/form-data" class="admin-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
             <input autocomplete="off" type="text" name="project-name" placeholder="Project Name">
         </div>
@@ -26,4 +27,5 @@
         </div>
         <button type="submit">Add Project</button>
     </form>
+    <script src="{{ url_for('static', filename='validation.js') }}"></script>
 {% endblock %}
