@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to my portfolio website where I showcase my projects and skills.">
     <title>My Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +14,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar">
+        <nav class="navbar" style="display: none;">
             <ul class="nav-links">
                 <li class="nav-link"><a href="/">Home</a></li>
                 <li class="nav-link"><a href="/about">About me</a></li>
@@ -30,6 +31,10 @@
     <main class="container">
         {% block main %}
         {% endblock %}
+        <div>
+            <img src="{{ url_for('static', filename='images/map-icon.png') }}" alt="icon map" class="map-icon">
+        </div>
     </main>
+    <script src="{{ url_for('static', filename='toggle-nav.js') }}"></script>
 </body>
 </html>
