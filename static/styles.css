@@ -5,7 +5,7 @@
     --color-text: #ffffff;
     --clip-small: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
     --clip-medium: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
-    --clip-nav: polygon(5vh 0%, 100% 0%, 100% calc(100% - 6vh), calc(100% - 5vh) 100%, 0% 100%, 0% 6vh);
+    --clip-nav: polygon(6% 0%, 100% 0%, 100% calc(100% - 99%), calc(100% - 6%) 100%, 0% 100%, 0% 99%);
     --shadow-cyan: 0 0 10px var(--color-primary);
     --shadow-cyan-inset: inset 0 0 10px rgba(0, 240, 255, 1);
     --shadow-cyan-both: var(--shadow-cyan), var(--shadow-cyan-inset);
@@ -51,9 +51,18 @@ body {
 .nav-link {
     box-shadow: var(--shadow-cyan-both);
     clip-path: var(--clip-nav);
-    padding: 2vh;
+    padding: 1vw;
     width: 100%;
     text-align: center;
+}
+
+.map-icon {
+    width: 5vh;
+    height: 5vh;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
 }
 
 .title {
@@ -116,21 +125,6 @@ a {
     gap: 5vh;
     width: 90%;
     position: relative;
-}
-
-.about-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        linear-gradient(rgba(255, 0, 255, 0.05) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.05) 2px, transparent 2px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: -1;
 }
 
 .about-content {
@@ -239,16 +233,6 @@ form, .admin-project-item {
     background: var(--gradient-bg-subtle);
 }
 
-.admin-project-item {
-    text-transform: uppercase;
-    font-size: 1.3em;
-    display: flex;
-    flex-direction: row;
-    padding: 2em;
-    margin-bottom: 2em;
-    gap: 3vw;
-}
-
 input, textarea {
     width: 95%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -281,11 +265,30 @@ button:hover {
     transition: all 0.3s ease;
 }
 
+.hidden-form {
+    border: none;
+    box-shadow: none;
+    clip-path: none;
+    padding: 0;
+    margin: 0;
+}
+
 .admin-projects {
     padding:0;
 }
 
-@media (max-width: 1024px) {
+.admin-project-item {
+    text-transform: uppercase;
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2em;
+    margin-bottom: 2em;
+    gap: 3vw;
+}
+
+@media screen and (max-width: 1024px) {
     .about-section {
         flex-direction: column;
         align-items: center;
@@ -318,7 +321,7 @@ button:hover {
     }
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
     .nav-links {
         align-items: center;
         flex-direction: column;
