@@ -116,16 +116,9 @@ def admin():
     return render_template('admin.html', projects=get_projects_names())
 
 
-@app.route('/delete/<int:project_id>')
+@app.route('/delete/<int:project_id>', methods=['POST'])
 @login_required
 def delete(project_id):
     delete_project(project_id)
     return redirect('/admin')
 
-
-# TODO
-@app.route('/edit/<int:project_id>', methods=['POST'])
-@login_required
-def edit_project(project_id):
-    # Implement the logic to edit the project here
-    return redirect('/admin')
