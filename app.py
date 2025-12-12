@@ -98,20 +98,41 @@ def admin():
         project_name = request.form.get("project-name")
         desc = request.form.get("desc")
 
-        img_file = request.files.get("project-img")  
+        img_file = request.files.get("project-img")
         if not img_file or img_file.filename == '':
             return render_template("admin.html", error="Please provide an image")
+        
+        filename = img_file.filename
+        extension = filename.rsplit('.', 1)[1].lower() if '.' in filename else ''
+        if extension not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
+            return render_template("admin.html", error="Unsupported image format")
+        
         img = img_file.read()
-
+        if not img:
+            return render_template("admin.html", error="Failed to read image file")
+        
+        if len(img) > 5 * 1024 * 1024: 
+            return render_template("admin.html", error="Image file size exceeds 5MB limit")
+        
         url = request.form.get("project-url")
         github = request.form.get("project-github")
         techs = request.form.get("project-tech")
 
-        project_id = insert_project(project_name, desc, img, url, github)
+        if not project_name or not desc or not url or not github or not techs:
+            return render_template("admin.html", error="Please fill in all required fields")
+        
+        if not url.startswith("http://") and not url.startswith("https://"):
+            return render_template("admin.html", error="Project URL must start with http:// or https://")
+        
+        if not github.startswith("http://") and not github.startswith("https://"):
+            return render_template("admin.html", error="GitHub URL must start with http:// or https://")
 
-        if project_id and techs:
-            for tech in techs.split(','):
-                insert_language(project_id, tech.strip())
+        project_id = insert_project(project_name, desc, img, url, github)
+        if not project_id:
+            return render_template("admin.html", error="Failed to add project")
+
+        for tech in techs.split(','):
+            insert_language(project_id, tech.strip())
 
     return render_template('admin.html', projects=get_projects_names())
 
