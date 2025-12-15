@@ -5,3 +5,5 @@ Flask-WTF
 Pillow
 Werkzeug
 python-dotenv
+gunicorn
+redis
