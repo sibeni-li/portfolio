@@ -1,3 +1,7 @@
+/* ========================================
+   GLOBAL STYLES AND VARIABLES
+   ======================================== */
+
 :root {
     --color-primary: #00f0ff;
     --color-secondary: #ff00ff;
@@ -34,6 +38,102 @@ body {
     min-height: 100vh;
 }
 
+.title {
+    font-size: 3em;
+    text-transform: uppercase;
+    animation: titlePulse 5s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary); }
+    50% { text-shadow: 0 0 15px var(--color-secondary), 0 0 30px var(--color-secondary), 0 0 45px var(--color-secondary); }
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 1.2em;
+}
+
+/* ========================================
+   SHARED STYLES
+   ======================================== */
+
+/* Shared title styles across multiple pages */
+.abt-title, .project-title, .adm-title {
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
+}
+
+/* Shared card styles */
+.button, .about-content, .project-card {
+    border: solid 1px cyan;
+    padding: 20px 30px;
+    box-shadow: var(--shadow-cyan-both);
+    clip-path: var(--clip-medium);
+}
+
+/* Shared hover styles */
+.button:hover, .nav-link:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/*Shared list styles*/
+.list {
+    list-style-type: none;
+    display: flex;
+    justify-content: start;
+    gap: 2vw;
+    padding: 0;
+}
+
+.list-item, .pink-card, .item-link {
+    background: var(--gradient-pink);
+    text-transform: uppercase;
+    border: solid 1px var(--color-secondary);
+    padding: 10px 15px;
+    box-shadow: 0 0 10px var(--color-secondary), inset 0 0 10px rgba(255, 0, 255, 1);
+    clip-path: var(--clip-small);
+}
+
+/* Shared container styles */
+.project-container, .admin-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 90%;
+    padding: 40px 0;
+}
+
+/* Shared image styles */
+.profile-pic, .project-image {
+    width: 100%;
+    border: solid 1px var(--color-primary);
+    box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5);
+    clip-path: var(--clip-medium);
+}
+
+/*Shared animations*/
+@keyframes imageGlow {
+    0%, 100% { box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5); }
+    50% { box-shadow: 0 0 25px var(--color-secondary), inset 0 0 25px rgba(255, 0, 255, 0.5); }
+}
+
+@keyframes borderGlow {
+    0%, 100% { box-shadow: var(--shadow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.5); }
+    50% { box-shadow: 0 0 20px var(--color-secondary), inset 0 0 20px rgba(255, 0, 255, 0.5); }
+}
+
+
+/* ========================================
+   LAYOUT (Navbar & Navigation)
+   ======================================== */
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -56,31 +156,23 @@ body {
     text-align: center;
 }
 
+.nav-link > a {
+    display: block;
+    width: 100%;
+}
+
 .map-icon {
     width: 5vh;
     height: 5vh;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 2vh;
+    right: 1vw;
     cursor: pointer;
 }
 
-.title {
-    font-size: 3em;
-    text-transform: uppercase;
-    animation: titlePulse 5s ease-in-out infinite;
-}
-
-@keyframes titlePulse {
-    0%, 100% { text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary); }
-    50% { text-shadow: 0 0 15px var(--color-secondary), 0 0 30px var(--color-secondary), 0 0 45px var(--color-secondary); }
-}
-
-.abt-title, .project-title, .adm-title {
-    text-transform: uppercase;
-    color: var(--color-text);
-    text-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
-}
+/* ========================================
+   INDEX PAGE (Home)
+   ======================================== */
 
 .btn-container {
     display: flex;
@@ -88,40 +180,19 @@ body {
     position: relative;
 }
 
-.button, .about-content, .project-card {
-    border: solid 1px cyan;
-    padding: 20px 30px;
-    box-shadow: var(--shadow-cyan-both);
-    clip-path: var(--clip-medium);
-}
-
-.nav-link > a {
-    display: block;
-    width: 100%;
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-text);
-    font-size: 1.2em;
-}
 
 .button {
     background: var(--gradient-bg);
     animation: borderGlow 3s ease-in-out infinite;
 }
 
-.button:hover, .nav-link:hover {
-    background-color: rgba(0, 255, 255, 0.1);
-    box-shadow: var(--shadow-cyan), 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-}
+/* ========================================
+   ABOUT PAGE
+   ======================================== */
 
 .about-section {
     display: flex;
     flex-direction: row;
-    height: 100vh;
     gap: 5vh;
     width: 90%;
     position: relative;
@@ -138,37 +209,8 @@ a {
     transition: all 0.3s ease;
 }
 
-.list {
-    list-style-type: none;
-    display: flex;
-    justify-content: start;
-    gap: 2vw;
-    padding: 0;
-}
-
-.list-item, .pink-card, .item-link {
-    background: var(--gradient-pink);
-    text-transform: uppercase;
-    border: solid 1px var(--color-secondary);
-    padding: 10px 15px;
-    box-shadow: 0 0 10px var(--color-secondary), inset 0 0 10px rgba(255, 0, 255, 1);
-    clip-path: var(--clip-small);
-}
-
-.profile-pic, .project-image {
-    width: 100%;
-    border: solid 1px var(--color-primary);
-    box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5);
-    clip-path: var(--clip-medium);
-}
-
 .profile-pic {
     animation: imageGlow 4s ease-in-out infinite;
-}
-
-@keyframes imageGlow {
-    0%, 100% { box-shadow: 0 0 15px var(--color-primary), inset 0 0 15px rgba(0, 240, 255, 0.5); }
-    50% { box-shadow: 0 0 25px var(--color-secondary), inset 0 0 25px rgba(255, 0, 255, 0.5); }
 }
 
 .wrapper {
@@ -176,6 +218,10 @@ a {
     flex-direction: column;
     gap: 5vh;
 }
+
+/* ========================================
+   PROJECTS PAGE (List View)
+   ======================================== */
 
 .projects-container {
     display: grid;
@@ -196,13 +242,9 @@ a {
     box-shadow: 0 0 20px var(--color-primary), 0 0 40px var(--color-primary), inset 0 0 20px rgba(0, 240, 255, 1);
 }
 
-.project-container, .admin-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    width: 90%;
-    padding: 40px 0;
-}
+/* ========================================
+   PROJECT PAGE (Detail View)
+   ======================================== */
 
 .project-container .project-card:first-child {
     grid-row: span 2;
@@ -214,10 +256,10 @@ a {
     animation: borderGlow 5s ease-in-out infinite;
 }
 
-@keyframes borderGlow {
-    0%, 100% { box-shadow: var(--shadow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.5); }
-    50% { box-shadow: 0 0 20px var(--color-secondary), inset 0 0 20px rgba(255, 0, 255, 0.5); }
-}
+
+/* ========================================
+   ADMIN PAGE
+   ======================================== */
 
 form {
     display: flex;
@@ -287,6 +329,10 @@ button:hover {
     margin-bottom: 2em;
     gap: 3vw;
 }
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
 
 @media screen and (max-width: 1024px) {
     .about-section {
