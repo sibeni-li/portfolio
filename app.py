@@ -1,5 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, session, send_file
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv
@@ -22,6 +24,13 @@ Session(app)
 create_table()
 
 
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -29,6 +38,16 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
+
+# Error handlers
+@app.errorhandler(404)
+def not_found(error):
+    return render_template("error.html", code=404, message="Page not found"), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("error.html", code=500, message="Internal server error"), 500
 
 
 # Public routes
@@ -68,6 +87,7 @@ def project_image(project_id):
 
 # Admin routes
 @app.route('/login', methods=['GET', 'POST'])
+@limiter.limit("5 per minute")
 def login():
     if request.method == 'POST':
         username = request.form.get("username")
