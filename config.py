@@ -12,6 +12,7 @@ class Config:
     ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
     LOG_FILE = 'app.log'
     LOG_LEVEL = 'ERROR'
+    REDIS_URL = os.getenv("REDIS_URL", "memory://")
 
 class DevelopmentConfig(Config):
     """Development-specific settings"""
