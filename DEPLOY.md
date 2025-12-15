@@ -11,6 +11,12 @@
 | Flask app | `/etc/systemd/system/flaskapp.service` |
 | Caddy | `/etc/caddy/Caddyfile` |
 
+**Check:**
+```bash
+sudo systemctl status caddy
+sudo systemctl status flaskapp
+```
+
 ## Commands
 
 **Restart app after code changes:**
