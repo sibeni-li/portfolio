@@ -10,6 +10,8 @@ class Config:
     SESSION_TYPE = "filesystem"
     ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
     ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+    LOG_FILE = 'app.log'
+    LOG_LEVEL = 'ERROR'
 
 class DevelopmentConfig(Config):
     """Development-specific settings"""
