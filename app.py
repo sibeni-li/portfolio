@@ -6,6 +6,7 @@ from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv
 from io import BytesIO
+from PIL import Image
 from werkzeug.security import check_password_hash
 
 from helpers import login_required
@@ -127,13 +128,28 @@ def admin():
         if extension not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
             return render_template("admin.html", error="Unsupported image format")
         
-        img = img_file.read()
-        if not img:
-            return render_template("admin.html", error="Failed to read image file")
-        
-        if len(img) > 5 * 1024 * 1024: 
-            return render_template("admin.html", error="Image file size exceeds 5MB limit")
-        
+        # Open and optimize image
+        try:
+            img = Image.open(img_file)
+            img.thumbnail((800, 600))  # Resize keeping aspect ratio
+            
+            # Convert to RGB if needed (for PNG with transparency)
+            if img.mode in ('RGBA', 'LA', 'P'):
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
+                img = background
+            
+            # Save optimized image to bytes
+            output = BytesIO()
+            img.save(output, format='JPEG', optimize=True, quality=85)
+            img_data = output.getvalue()
+            
+            if len(img_data) > 5 * 1024 * 1024:
+                return render_template("admin.html", error="Image file size exceeds 5MB limit")
+                
+        except Exception as e:
+            return render_template("admin.html", error="Failed to process image")
+                
         url = request.form.get("project-url")
         github = request.form.get("project-github")
         techs = request.form.get("project-tech")
@@ -147,7 +163,7 @@ def admin():
         if not github.startswith("http://") and not github.startswith("https://"):
             return render_template("admin.html", error="GitHub URL must start with http:// or https://")
 
-        project_id = insert_project(project_name, desc, img, url, github)
+        project_id = insert_project(project_name, desc, img_data, url, github)
         if not project_id:
             return render_template("admin.html", error="Failed to add project")
 
