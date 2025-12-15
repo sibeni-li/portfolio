@@ -37,11 +37,13 @@ journalctl -u caddy -f
 
 ## Environment
 Create `/home/flaskapp/portfolio/.env` with:
-```
-SECRET_KEY=
-ADMIN_USERNAME=
-ADMIN_PASSWORD=
-REDIS_URL=memory://
+```sh
+ADMIN_USERNAME=xxxxx
+ADMIN_PASSWORD=scrypt:xxxx
+SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#FLASK_ENV=development
+FLASK_ENV=prod
+#REDIS_URL=redis://localhost:6379
 ```
 
 ## Ports
