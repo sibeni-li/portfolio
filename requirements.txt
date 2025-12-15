@@ -2,5 +2,6 @@ Flask
 Flask-Limiter
 Flask-Session
 Flask-WTF
+Pillow
 Werkzeug
 python-dotenv
