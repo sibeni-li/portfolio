@@ -1,4 +1,5 @@
 import os
+from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, redirect, session, send_file
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -16,6 +17,12 @@ app = Flask(__name__)
 csrf = CSRFProtect(app)
 
 app.config.from_object(config.DevelopmentConfig if os.getenv("FLASK_ENV") == "development" else config.ProductionConfig)
+
+if not app.debug:
+    handler = RotatingFileHandler(app.config['LOG_FILE'], maxBytes=10000, backupCount=3)
+    handler.setLevel(app.config['LOG_LEVEL'])
+    app.logger.addHandler(handler)
+    
 Session(app)
 
 create_table()
@@ -24,7 +31,8 @@ create_table()
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
-    default_limits=["200 per day", "50 per hour"]
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="redis://localhost:6379"
 )
 
 
@@ -94,6 +102,7 @@ def login():
             session["logged_in"] = True
             return redirect("/admin")
         else:            
+            app.logger.error(f"Failed login attempt for username: {username}")
             return render_template("login.html", error="Invalid username or password")
     return render_template('login.html')
 
@@ -122,6 +131,7 @@ def admin():
         filename = img_file.filename
         extension = filename.rsplit('.', 1)[1].lower() if '.' in filename else ''
         if extension not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
+            app.logger.error(f"Unsupported image format attempted: {extension}")
             return render_template("admin.html", error="Unsupported image format")
         
         # Open and optimize image
@@ -141,9 +151,11 @@ def admin():
             img_data = output.getvalue()
             
             if len(img_data) > 5 * 1024 * 1024:
+                app.logger.error("Image file size exceeds limit after processing")
                 return render_template("admin.html", error="Image file size exceeds 5MB limit")
                 
         except Exception as e:
+            app.logger.error(f"Image processing error: {e}")
             return render_template("admin.html", error="Failed to process image")
                 
         url = request.form.get("project-url")
@@ -174,4 +186,3 @@ def admin():
 def delete(project_id):
     delete_project(project_id)
     return redirect('/admin')
-
