@@ -4,27 +4,23 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
-from dotenv import load_dotenv
 from io import BytesIO
 from PIL import Image
 from werkzeug.security import check_password_hash
 
+import config
 from helpers import login_required
 from schema import create_table, insert_project, insert_language, get_projects_names, get_project_details, get_project_languages, delete_project
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 
-load_dotenv()
-
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
+app.config.from_object(config.DevelopmentConfig if os.getenv("FLASK_ENV") == "development" else config.ProductionConfig)
 Session(app)
 
 create_table()
 
-
+# Rate limiting
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
@@ -94,7 +90,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         
-        if username == os.getenv("ADMIN_USERNAME") and check_password_hash(os.getenv("ADMIN_PASSWORD"), password):
+        if username == app.config["ADMIN_USERNAME"] and check_password_hash(app.config["ADMIN_PASSWORD"], password):
             session["logged_in"] = True
             return redirect("/admin")
         else:            
