@@ -4,3 +4,4 @@ __pycache__/
 .env
 projects.db
 flask_session/
+*.log
